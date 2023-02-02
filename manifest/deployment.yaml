@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs4
+  name: nodejs
 spec:
  replicas: 3
  selector:
    matchLabels:
-     app: nodejs-app4
+     app: nodejs-app
  template:
    metadata:
      labels:
-       app: nodejs-app4
+       app: nodejs-app
    spec:                  
      containers:
-     - name: nodejs-app4
+     - name: nodejs-app
        image: vigneshvicky12345/node-app:latest
        imagePullPolicy: Always
        ports:
@@ -22,11 +22,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodejs-service4
+  name: nodejs-service
 spec:
   type: LoadBalancer
   selector:
-    app: nodejs-app4
+    app: nodejs-app
   ports:
-    - port: 6000
+    - port: 5000
       targetPort: 4000
