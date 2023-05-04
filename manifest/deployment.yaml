@@ -14,7 +14,7 @@ spec:
    spec:                  
      containers:
      - name: nodejs-app
-       image: vigneshvicky12345/node-app:v1
+       image: vigneshvicky12345/node-app:latest
        imagePullPolicy: Always
        ports:
        - containerPort: 4000
