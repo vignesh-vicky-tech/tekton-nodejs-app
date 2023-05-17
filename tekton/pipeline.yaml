@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: kaniko-pipeline1
+spec:
+  workspaces:
+    - name: git-source
+  params:
+    - name: git_revision
+  tasks:
+    - name: fetch-from-git
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: https://github.com/vignesh-vicky-tech/tekton-nodejs-app.git
+        - name: revision
+          value: $(params.git_revision)
+      workspaces:
+        - name: output
+          workspace: git-source
+    - name: build-image
+      runAfter: [ fetch-from-git ]
+      taskRef:
+        name: kaniko
+      params:
+        - name: IMAGE
+          value: vigneshvicky12345/php-app
+        - name: CONTEXT
+          value: source
+        - name: DOCKERFILE
+          value: $(workspaces.source.path)/source/Dockerfile
+        - name: EXTRA_ARGS
+          value: [ '--no-push' ]
+      workspaces:
+        - name: source
+          workspace: git-source
