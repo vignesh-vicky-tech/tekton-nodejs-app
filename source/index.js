@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 
 app.get('/', (req, res) => {
-    res.send('Hello==Tekton')
+    res.send('HelloTekton')
 })
 
 app.listen(4000, () => {
